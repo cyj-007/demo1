@@ -1,0 +1,50 @@
+spring:
+  redis:
+    host: 127.0.0.1 #地址
+    port: 6379 #端口
+    database: 1
+#    password: 123456
+  # 数据源配置项
+  datasource:
+    name: spring
+    url: jdbc:mysql://127.0.0.1:3306/${spring.datasource.name}?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=CTT
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+
+
+
+# MyBatis Plus 的配置项
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true # 虽然默认为 true ，但是还是显示去指定下。
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 打印日志
+  global-config:
+    db-config:
+      id-type: assign_id # 雪花算法
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+  # 枚举包扫描
+  # type-enums-package: com.example.demo1.emun
+  # xml位置扫描
+  mapper-locations: classpath*:mapper/**/*.xml
+  # 实体类扫描
+  type-aliases-package: com.example.demo1.modules.dao.*
+
+knife4j:
+  # 要使用Knife4j提供的增强
+  enable: true
+  setting:
+    # Knife4j默认显示中文(zh-CN),如果开发者想直接显示英文(en-US)，在通过该配置进行设置即可
+    language: zh-CN
+
+
+# 自定义配置
+cyj:
+  security:
+    token-header: Authorization
+    token-secret: abcdefghijklmnopqrstuvwxyz
+    token-timeout: 1d
+    session-timeout: 1d
+    mock-enable: true
+    mock-secret: admin
